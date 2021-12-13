@@ -13,11 +13,11 @@ def choisirPdf(tableau_fichiers):
         i=i+1
 
     for numero in range(0,i):
-        print("Entrez un numero de fichier ou ( all pour tout les fichiers ) ou ( q qui quitter )")
-        a=input("numero : ")
+        print("Entrez un numero de fichier ou ( all pour tout les fichiers ) ou ( q pour quitter )")
+        a=input("Numero : ")
        
         if ( a =="q"):
-            print("Quittez")
+            print("Vous avez quitté le menu !")
             break
 
         elif (a == "all"):
@@ -26,8 +26,7 @@ def choisirPdf(tableau_fichiers):
         elif (0 < int(a) < i):
             a = int(a) 
             nouveauTab.append(tableau_fichiers[a])
-	else:
-		print("Le fichier n'existe pas !")
+        else: print("Le fichier n'existe pas !")
 
     return nouveauTab
 
@@ -46,19 +45,6 @@ def getTitle(fichier):
     title = fichier.split("\n")[0]
     return title
 
-def getIntroduction(fichier):
-    if re.search("Introduction", fichier):
-        donneFichier = fichier.split("Introduction")[1]
-        intro = donneFichier.split("\n\n")[0]
-        intro = intro.replace("\n", " ")
-        return intro
-    elif re.search("INTRODUCTION", fichier):
-        donneFichier = fichier.split("INTRODUCTION")[1]
-        intro = donneFichier.split("\n\n")[0]
-        intro = intro.replace("\n", " ")
-        return intro
-    else:
-        return "Pas de resumé"
 
 def getResume(fichier):
     if re.search("Abstract", fichier):
@@ -89,6 +75,40 @@ def getReferences(fichier):
     else:
         return "Pas de references"
 
+
+def getAuteurs(fichier):
+    Auteurs = " "
+    return Auteurs
+
+
+def getIntroduction(fichier):
+    if re.search("Introduction", fichier):
+        donneFichier = fichier.split("Introduction")[1]
+        intro = donneFichier.split("\n\n")[0]
+        intro = intro.replace("\n", " ")
+        return intro
+    elif re.search("INTRODUCTION", fichier):
+        donneFichier = fichier.split("INTRODUCTION")[1]
+        intro = donneFichier.split("\n\n")[0]
+        intro = intro.replace("\n", " ")
+        return intro
+    else:
+        return "Pas d'introduction"
+
+
+def getCorps(fichier):
+    Corps = " "
+    return Corps
+
+
+def getConclusion(fichier):
+    Conclusion = " "
+    return Conclusion
+
+
+def getDiscussion(fichier):
+    Discussion = " "
+    return Discussion
 
 
 # tester le type d'argument pour choisir le type de sortie
@@ -137,6 +157,10 @@ for fichier in nouveauTab:
         resumefichier = getResume(data)
         introfichier = getIntroduction(data)
         referencesfichier = getReferences(data)
+        auteurfichier = getAuteurs(data)
+        corpsfichier = getCorps(data)
+        conclusionfichier = getConclusion(data)
+        discussionfichier = getDiscussion(data)
 
         if formatfichier == "txt":
             with open("resultat_'%s'.txt" % nomfichier, 'a') as resultat:
@@ -144,11 +168,19 @@ for fichier in nouveauTab:
                 resultat.write("\n")
                 resultat.write("Le titre du papier : " + str(titrefichier))
                 resultat.write("\n")
-                resultat.write("L'introduction': " + str(introfichier))
+                resultat.write("Auteurs : " + str(auteurfichier))
                 resultat.write("\n")
                 resultat.write("Le résumé (abstract) de l’auteur : " + str(resumefichier))
                 resultat.write("\n")
-                resultat.write(" Les références bibliographiques : " + str(referencesfichier))
+                resultat.write("L'introduction : " + str(introfichier))
+                resultat.write("\n")
+                resultat.write("Le développement du papier: " + str(corpsfichier))
+                resultat.write("\n")
+                resultat.write("La conclusion du papier : " + str(conclusionfichier))
+                resultat.write("\n")
+                resultat.write("La discussion du papier : " + str(discussionfichier))
+                resultat.write("\n")
+                resultat.write("Les références bibliographiques : " + str(referencesfichier))
             resultat.close()
         elif formatfichier == "xml":
             root = ET.Element('article')
@@ -159,12 +191,24 @@ for fichier in nouveauTab:
             titre = ET.SubElement(root, 'titre')
             titre.text = str(titrefichier)
             titre.tail = '\n'
-            introduction = ET.SubElement(root, 'introduction')
-            introduction.text = str(introfichier)
-            introduction.tail = '\n'
+            auteur = ET.SubElement(root, 'auteur')
+            auteur.text = str(auteurfichier)
+            auteur.tail = '\n'
             abstract = ET.SubElement(root, 'abstract')
             abstract.text = str(resumefichier)
             abstract.tail = '\n'
+            introduction = ET.SubElement(root, 'introduction')
+            introduction.text = str(introfichier)
+            introduction.tail = '\n'
+            corps = ET.SubElement(root, 'corps')
+            corps.text = str(corpsfichier)
+            corps.tail = '\n'
+            conclusion = ET.SubElement(root, 'conclusion')
+            conclusion.text = str(conclusionfichier)
+            conclusion.tail = '\n'
+            discussion = ET.SubElement(root, 'discussion')
+            discussion.text = str(discussionfichier)
+            discussion.tail = '\n'
             biblio = ET.SubElement(root, 'biblio')
             biblio.text = str(referencesfichier)
             biblio.tail = '\n'
@@ -174,4 +218,3 @@ for fichier in nouveauTab:
             print("Format de fichier inconnu !")
 
     f.close()
-
