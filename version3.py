@@ -22,6 +22,7 @@ def choisirPdf(tableau_fichiers):
 
         elif (a == "all"):
             nouveauTab = tableau_fichiers
+            print("Tous les fichiers ont été ajouter !")
             break
         elif (0 < int(a) < i):
             a = int(a) 
