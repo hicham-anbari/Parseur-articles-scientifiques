@@ -23,7 +23,7 @@ def choisirPdf(tableau_fichiers):
         elif (a == "all"):
             nouveauTab = tableau_fichiers
             break
-        elif (0 < a < i):
+        elif (0 < int(a) < i):
             a = int(a) 
             nouveauTab.append(tableau_fichiers[a])
 	else:
