@@ -104,13 +104,33 @@ def getCorps(fichier):
 
 
 def getConclusion(fichier):
-    Conclusion = " "
-    return Conclusion
+    if re.search("Conclusion", fichier):
+        donneFichier = fichier.split("Conclusion")[1]
+        intro = donneFichier.split("\n\n")[0]
+        intro = intro.replace("\n", " ")
+        return intro
+    elif re.search("CONCLUSION", fichier):
+        donneFichier = fichier.split("CONCLUSION")[1]
+        intro = donneFichier.split("\n\n")[0]
+        intro = intro.replace("\n", " ")
+        return intro
+    else:
+        return "Pas de conclusion"
 
 
 def getDiscussion(fichier):
-    Discussion = " "
-    return Discussion
+    if re.search("Discussion", fichier):
+        donneFichier = fichier.split("Discussion")[1]
+        intro = donneFichier.split("\n\n")[0]
+        intro = intro.replace("\n", " ")
+        return intro
+    elif re.search("DISCUSSION", fichier):
+        donneFichier = fichier.split("DISCUSSION")[1]
+        intro = donneFichier.split("\n\n")[0]
+        intro = intro.replace("\n", " ")
+        return intro
+    else:
+        return "Pas de discussion"
 
 
 # tester le type d'argument pour choisir le type de sortie
@@ -139,10 +159,8 @@ tableau_fichiers = fichiers.split("\n")
 # Pop the array last element : ''
 tableau_fichiers.pop(len(tableau_fichiers)-1)
 
-
-#afficheALlPdf(tableau_fichiers)
-
 # os.system("mkdir corpus_txt")
+
 # Convert each pdf to txt
 nouveauTab = choisirPdf(tableau_fichiers)
 convertPdfToTxt(nouveauTab)
