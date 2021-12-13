@@ -23,9 +23,11 @@ def choisirPdf(tableau_fichiers):
         elif (a == "all"):
             nouveauTab = tableau_fichiers
             break
-        else:
+        elif (0 < a < i):
             a = int(a) 
             nouveauTab.append(tableau_fichiers[a])
+	else:
+		print("Le fichier n'existe pas !")
 
     return nouveauTab
 
