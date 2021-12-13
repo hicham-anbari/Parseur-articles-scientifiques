@@ -26,6 +26,7 @@ def choisirPdf(tableau_fichiers):
         elif (0 < int(a) < i):
             a = int(a) 
             nouveauTab.append(tableau_fichiers[a])
+            print("Vous avez ajouter le fichier : ", tableau_fichiers[a])
         else: print("Le fichier n'existe pas !")
 
     return nouveauTab
