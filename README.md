@@ -1,8 +1,8 @@
 # Parseur d’articles scientifiques en format texte
 
-### Extraction des nom des fichiers, titres , résumés, introduction, auteurs, corps, conclusion, discussion et bibliographie:
+### Extraction des nom des fichiers, titres , résumés, introductions, auteurs, corps, conclusions, discussions et bibliographies:
 
-Au préalable il faut créer un fichier nommé 'CORPUS' à la racine, avec tous les PDF à l'intérieur.
+Au préalable il faut créer un dossier nommé 'CORPUS' à la racine, avec tous les PDF à l'intérieur.
 Aller à la **racine** du repertoire où ce trouve les différents fichiers .PDF et lancer le programme python:
 
 Fichiers au format TXT :
