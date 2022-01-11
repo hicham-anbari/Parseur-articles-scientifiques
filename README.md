@@ -1,4 +1,4 @@
-# Parseur d’articles scientifiques en format texte
+# Parseur d’articles scientifiques 
 
 ### Extraction des nom des fichiers, titres , résumés, introductions, auteurs, corps, conclusions, discussions et bibliographies:
 
